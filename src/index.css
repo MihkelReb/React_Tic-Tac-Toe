@@ -47,5 +47,10 @@ body {
   
   .game-info {
     margin-left: 20px;
+    margin-right: 40px;
+    padding-bottom: 20px;
   }
-  
+
+.game-history {
+
+}
