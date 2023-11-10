@@ -16,7 +16,7 @@ body {
   .status {
     margin-bottom: 10px;
   }
-  
+
   .square {
     background: #fff;
     border: 1px solid #999;
@@ -51,6 +51,6 @@ body {
     padding-bottom: 20px;
   }
 
-.game-history {
-
-}
+  .selected {
+    font-weight: bold;
+  }

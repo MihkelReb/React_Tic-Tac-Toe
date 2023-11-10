@@ -65,7 +65,6 @@ class Game extends React.Component {
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
   
-    // Calculate the location for the clicked square
     const locations = [];
     for (let i = 0; i < 9; i++) {
       const row = Math.floor(i / 3) + 1;
@@ -77,7 +76,7 @@ class Game extends React.Component {
       history: history.concat([
         {
           squares: squares,
-          location: locations[i], // Store the location
+          location: locations[i],
         },
       ]),
       stepNumber: history.length,
@@ -101,13 +100,14 @@ class Game extends React.Component {
       const desc = move ?
         'Go to move #' + move :
         'Go to game start';
+      const isSelected = move === this.state.stepNumber ? 'selected' : '';
 
       return (
-        <li key={move}>
+        <li key={move} className={isSelected}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
-    });
+      });
 
     const currentStep = history[this.state.stepNumber];
     const location = currentStep.location ? `Column: ${currentStep.location[0]}, Row: ${currentStep.location[1]}` : '';
