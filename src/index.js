@@ -46,12 +46,21 @@ class Board extends React.Component {
 class Game extends React.Component {
   constructor(props) {
     super(props);
+
+    const location = [];
+    for (let i = 0; i < 9; i++) {
+      const row = Math.floor(i / 3) + 1;
+      const col = (i % 3) + 1;
+      location.push([col, row]);
+    }
+
     this.state = {
       history: [{
         squares: Array(9).fill(null)
       }],
       stepNumber: 0,
-      xIsNext: true
+      xIsNext: true,
+      location: location,
     };
   }
 
@@ -83,14 +92,17 @@ class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-
     const moves = history.map((step, move) => {
-      const desc = move ?
+    const desc = move ?
         'Go to move #' + move :
         'Go to game start';
+  
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button onClick={() => {
+            this.jumpTo(move);
+            
+            }}>{desc}</button>
         </li>
       );
     });
@@ -113,6 +125,11 @@ class Game extends React.Component {
         <div className="game-info">
           <div>{status}</div>
           <ol>{moves}</ol>
+        </div>
+        <div className="game-history">
+          <div>Game History</div>
+          <br></br>
+          <ol></ol>
         </div>
       </div>
     );
@@ -137,7 +154,7 @@ function calculateWinner(squares) {
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+    if (squares[a] !== null && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }
   }
